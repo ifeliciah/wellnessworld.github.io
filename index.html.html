@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wellness World</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sage: #7a9e7e;
+    --sage-light: #b8d4bb;
+    --sage-pale: #edf4ee;
+    --clay: #c4856a;
+    --clay-light: #e8c5b5;
+    --cream: #faf8f3;
+    --bark: #3d3228;
+    --stone: #8a8278;
+    --mist: #f0ede6;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--bark);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 4rem;
+    background: rgba(250,248,243,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(122,158,126,0.15);
+  }
+
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--bark);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--sage); font-style: italic; }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  nav ul a {
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: var(--stone);
+    text-transform: uppercase;
+    transition: color 0.25s;
+  }
+
+  nav ul a:hover { color: var(--sage); }
+
+  .nav-cta {
+    background: var(--sage) !important;
+    color: white !important;
+    padding: 0.6rem 1.4rem;
+    border-radius: 50px;
+    transition: background 0.25s !important;
+  }
+
+  .nav-cta:hover { background: var(--bark) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 4rem 6rem 6rem;
+    position: relative;
+  }
+
+  .hero-tag {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--sage);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-tag::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--sage);
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.2rem, 5vw, 5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--bark);
+    margin-bottom: 1.5rem;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--sage);
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--stone);
+    max-width: 400px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+
+  .btn-group { display: flex; gap: 1rem; align-items: center; }
+
+  .btn-primary {
+    background: var(--bark);
+    color: white;
+    padding: 0.9rem 2.2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    transition: background 0.25s, transform 0.2s;
+  }
+
+  .btn-primary:hover { background: var(--sage); transform: translateY(-1px); }
+
+  .btn-secondary {
+    color: var(--bark);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--bark);
+    padding-bottom: 2px;
+    transition: color 0.25s, border-color 0.25s;
+  }
+
+  .btn-secondary:hover { color: var(--sage); border-color: var(--sage); }
+
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 3.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(61,50,40,0.12);
+  }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: var(--bark);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--stone);
+    margin-top: 0.3rem;
+    font-weight: 400;
+  }
+
+  .hero-right {
+    background: var(--sage-pale);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-visual {
+    position: relative;
+    width: 380px;
+    height: 480px;
+  }
+
+  .hero-circle {
+    position: absolute;
+    border-radius: 50%;
+  }
+
+  .hc1 {
+    width: 320px; height: 320px;
+    background: var(--sage-light);
+    opacity: 0.5;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulse 6s ease-in-out infinite;
+  }
+
+  .hc2 {
+    width: 240px; height: 240px;
+    background: var(--sage);
+    opacity: 0.3;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulse 6s ease-in-out infinite 1s;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.06); }
+  }
+
+  .leaf-icon {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -55%);
+    width: 120px;
+    height: 120px;
+  }
+
+  .floating-card {
+    position: absolute;
+    background: white;
+    border-radius: 16px;
+    padding: 1rem 1.25rem;
+    box-shadow: 0 8px 32px rgba(61,50,40,0.1);
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .fc1 { bottom: 60px; left: -30px; animation-delay: 0s; }
+  .fc2 { top: 60px; right: -20px; animation-delay: 1.5s; }
+
+  .fc-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--stone);
+    margin-bottom: 0.3rem;
+  }
+
+  .fc-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--bark);
+  }
+
+  .fc-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--sage);
+    display: inline-block;
+    margin-right: 6px;
+  }
+
+  /* SERVICES */
+  .services {
+    padding: 8rem 6rem;
+    background: white;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
+  }
+
+  .section-tag {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--sage);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3vw, 3rem);
+    font-weight: 300;
+    color: var(--bark);
+    line-height: 1.2;
+  }
+
+  h2 em { font-style: italic; color: var(--sage); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .service-card {
+    padding: 3rem 2.5rem;
+    background: var(--mist);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .service-card:hover { background: var(--sage-pale); }
+
+  .service-card:hover .service-arrow { transform: translateX(6px); }
+
+  .service-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.875rem;
+    color: var(--stone);
+    margin-bottom: 2rem;
+    opacity: 0.6;
+  }
+
+  .service-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 1.5rem;
+  }
+
+  .service-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--bark);
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+
+  .service-desc {
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: var(--stone);
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+  }
+
+  .service-arrow {
+    font-size: 1.2rem;
+    color: var(--sage);
+    transition: transform 0.25s;
+    display: inline-block;
+  }
+
+  /* PHILOSOPHY */
+  .philosophy {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 60vh;
+  }
+
+  .phil-left {
+    background: var(--bark);
+    padding: 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .phil-left .section-tag { color: var(--sage-light); }
+
+  .phil-left h2 { color: white; }
+
+  .phil-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-style: italic;
+    color: var(--sage-light);
+    line-height: 1.6;
+    margin: 2rem 0;
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--sage);
+  }
+
+  .phil-text {
+    font-size: 0.9rem;
+    line-height: 1.9;
+    color: rgba(255,255,255,0.6);
+    font-weight: 300;
+  }
+
+  .phil-right {
+    background: var(--sage);
+    padding: 5rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .pillar {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .pillar-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.3);
+    line-height: 1;
+    min-width: 40px;
+  }
+
+  .pillar-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: white;
+    font-weight: 400;
+    margin-bottom: 0.4rem;
+  }
+
+  .pillar-text {
+    font-size: 0.8rem;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.7);
+    font-weight: 300;
+  }
+
+  /* TEAM */
+  .team {
+    padding: 8rem 6rem;
+    background: var(--cream);
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 4rem;
+  }
+
+  .team-card {
+    text-align: center;
+  }
+
+  .team-avatar {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: var(--mist);
+    border-radius: 8px;
+    margin-bottom: 1.25rem;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .avatar-initials {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--sage);
+    letter-spacing: 0.05em;
+  }
+
+  .team-card:nth-child(even) .team-avatar { background: var(--sage-pale); }
+
+  .team-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--bark);
+    margin-bottom: 0.2rem;
+  }
+
+  .team-role {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--stone);
+    font-weight: 400;
+  }
+
+  /* TESTIMONIALS */
+  .testimonials {
+    padding: 8rem 6rem;
+    background: var(--sage-pale);
+  }
+
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 4rem;
+  }
+
+  .testi-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 8px;
+  }
+
+  .testi-stars {
+    color: var(--clay);
+    font-size: 1rem;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+  }
+
+  .testi-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--bark);
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+  }
+
+  .testi-author {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--stone);
+  }
+
+  /* CTA */
+  .cta-section {
+    padding: 8rem 6rem;
+    background: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cta-section h2 {
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    max-width: 600px;
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-sub {
+    font-size: 1rem;
+    color: var(--stone);
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  .cta-form {
+    display: flex;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 440px;
+  }
+
+  .cta-input {
+    flex: 1;
+    padding: 0.9rem 1.25rem;
+    border: 1px solid rgba(61,50,40,0.18);
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    color: var(--bark);
+    background: var(--cream);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .cta-input:focus { border-color: var(--sage); }
+
+  /* FOOTER */
+  footer {
+    background: var(--bark);
+    color: rgba(255,255,255,0.5);
+    padding: 4rem 6rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 4rem;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    color: white;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  .footer-logo span { color: var(--sage-light); font-style: italic; }
+
+  .footer-desc {
+    font-size: 0.825rem;
+    line-height: 1.8;
+    font-weight: 300;
+    max-width: 220px;
+  }
+
+  .footer-col h4 {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 1.25rem;
+    font-weight: 400;
+  }
+
+  .footer-col ul { list-style: none; }
+
+  .footer-col ul li {
+    margin-bottom: 0.6rem;
+    font-size: 0.85rem;
+    font-weight: 300;
+  }
+
+  .footer-col ul a {
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-col ul a:hover { color: var(--sage-light); }
+
+  .footer-bottom {
+    background: rgba(0,0,0,0.2);
+    text-align: center;
+    padding: 1.25rem;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.25);
+    font-weight: 300;
+    letter-spacing: 0.04em;
+  }
+
+  /* Animations */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 1024px) {
+    nav { padding: 1.2rem 2rem; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { min-height: 50vh; }
+    .services { padding: 5rem 2rem; }
+    .services-grid { grid-template-columns: 1fr; gap: 2px; }
+    .philosophy { grid-template-columns: 1fr; }
+    .team-grid { grid-template-columns: repeat(2, 1fr); }
+    .testi-grid { grid-template-columns: 1fr; }
+    footer { grid-template-columns: 1fr 1fr; gap: 2rem; padding: 3rem 2rem; }
+    .testimonials, .team, .cta-section { padding: 5rem 2rem; }
+    .phil-left { padding: 4rem 2rem; }
+    .phil-right { padding: 4rem 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">Wellness <span>World</span></a>
+  <ul>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#philosophy">About</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#contact" class="nav-cta">Book Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Holistic Wellness Centre</div>
+    <h1>Nurture your <em>whole</em> self</h1>
+    <p class="hero-sub">A sanctuary where ancient wisdom meets modern science — restoring balance to body, mind, and spirit through deeply personalised care.</p>
+    <div class="btn-group">
+      <a href="#contact" class="btn-primary">Begin your journey</a>
+      <a href="#services" class="btn-secondary">Explore services →</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">12+</div>
+        <div class="stat-label">Years of care</div>
+      </div>
+      <div>
+        <div class="stat-num">4,800</div>
+        <div class="stat-label">Lives transformed</div>
+      </div>
+      <div>
+        <div class="stat-num">98%</div>
+        <div class="stat-label">Client satisfaction</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="hero-circle hc1"></div>
+      <div class="hero-circle hc2"></div>
+      <!-- Leaf SVG -->
+      <svg class="leaf-icon" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M60 15 C60 15 100 30 100 70 C100 95 82 108 60 108 C38 108 20 95 20 70 C20 30 60 15 60 15Z" fill="#7a9e7e" opacity="0.9"/>
+        <path d="M60 108 L60 45" stroke="white" stroke-width="2" stroke-linecap="round"/>
+        <path d="M60 75 C50 65 38 62 38 62" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M60 60 C70 50 82 47 82 47" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <div class="floating-card fc1">
+        <div class="fc-label"><span class="fc-dot"></span>Next session</div>
+        <div class="fc-val">9:00 am</div>
+      </div>
+      <div class="floating-card fc2">
+        <div class="fc-label"><span class="fc-dot"></span>Stress level</div>
+        <div class="fc-val">↓ 42%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-header fade-up">
+    <div>
+      <div class="section-tag">What we offer</div>
+      <h2>Pathways to <em>wellbeing</em></h2>
+    </div>
+    <a href="#contact" class="btn-secondary">See all services →</a>
+  </div>
+  <div class="services-grid">
+    <div class="service-card fade-up">
+      <div class="service-num">01</div>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none">
+        <circle cx="24" cy="24" r="18" stroke="#7a9e7e" stroke-width="1.5"/>
+        <path d="M24 14 C24 14 32 19 32 26 C32 31 28 34 24 34 C20 34 16 31 16 26 C16 19 24 14 24 14Z" fill="#b8d4bb" opacity="0.6"/>
+        <line x1="24" y1="34" x2="24" y2="20" stroke="#7a9e7e" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <div class="service-title">Therapeutic Massage</div>
+      <p class="service-desc">Deeply restorative massage techniques drawn from Swedish, deep tissue, and traditional healing modalities to release tension and restore flow.</p>
+      <span class="service-arrow">→</span>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-num">02</div>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none">
+        <path d="M24 8 C24 8 14 16 14 26 C14 32 18 36 24 36 C30 36 34 32 34 26 C34 16 24 8 24 8Z" stroke="#7a9e7e" stroke-width="1.5" fill="none"/>
+        <path d="M18 28 Q24 22 30 28" stroke="#7a9e7e" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <circle cx="24" cy="38" r="2" fill="#7a9e7e"/>
+      </svg>
+      <div class="service-title">Yoga & Movement</div>
+      <p class="service-desc">From gentle Hatha to dynamic Vinyasa, our expert teachers guide you through practices that build strength, flexibility, and inner stillness.</p>
+      <span class="service-arrow">→</span>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-num">03</div>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none">
+        <circle cx="24" cy="24" r="10" stroke="#7a9e7e" stroke-width="1.5"/>
+        <circle cx="24" cy="24" r="4" fill="#b8d4bb"/>
+        <line x1="24" y1="8" x2="24" y2="12" stroke="#7a9e7e" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="24" y1="36" x2="24" y2="40" stroke="#7a9e7e" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="8" y1="24" x2="12" y2="24" stroke="#7a9e7e" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="36" y1="24" x2="40" y2="24" stroke="#7a9e7e" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <div class="service-title">Meditation & Mindfulness</div>
+      <p class="service-desc">Guided meditation sessions and mindfulness training that cultivate presence, reduce anxiety, and build lasting emotional resilience.</p>
+      <span class="service-arrow">→</span>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-num">04</div>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none">
+        <path d="M10 38 Q20 20 24 16 Q28 20 38 38" stroke="#7a9e7e" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <path d="M16 30 Q24 24 32 30" stroke="#7a9e7e" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <circle cx="24" cy="14" r="3" fill="#b8d4bb" stroke="#7a9e7e" stroke-width="1"/>
+      </svg>
+      <div class="service-title">Nutritional Guidance</div>
+      <p class="service-desc">Personalised nutrition plans crafted by certified dietitians that nourish your unique constitution and support long-term vitality.</p>
+      <span class="service-arrow">→</span>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-num">05</div>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none">
+        <rect x="12" y="20" width="24" height="18" rx="4" stroke="#7a9e7e" stroke-width="1.5"/>
+        <path d="M18 20 V16 C18 12 30 12 30 16 V20" stroke="#7a9e7e" stroke-width="1.5" fill="none"/>
+        <circle cx="24" cy="29" r="3" fill="#b8d4bb"/>
+      </svg>
+      <div class="service-title">Holistic Therapies</div>
+      <p class="service-desc">Acupuncture, aromatherapy, and reflexology treatments that work in harmony with your body's natural healing intelligence.</p>
+      <span class="service-arrow">→</span>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-num">06</div>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none">
+        <path d="M24 12 L28 20 L38 21 L31 28 L33 38 L24 33 L15 38 L17 28 L10 21 L20 20 Z" stroke="#7a9e7e" stroke-width="1.5" fill="#b8d4bb" fill-opacity="0.4"/>
+      </svg>
+      <div class="service-title">Wellness Retreats</div>
+      <p class="service-desc">Immersive multi-day experiences that combine all our modalities into a transformative journey toward deep rest and renewal.</p>
+      <span class="service-arrow">→</span>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy" id="philosophy">
+  <div class="phil-left fade-up">
+    <div class="section-tag">Our philosophy</div>
+    <h2>Healing is a <em>practice,</em> not a destination</h2>
+    <blockquote class="phil-quote">"The greatest wealth is health — and true health embraces body, mind, and the spirit within."</blockquote>
+    <p class="phil-text">At Wellness World, we believe that wellbeing is not a state you arrive at — it is a living, breathing practice woven into every day. Our integrative approach honours the interconnectedness of all dimensions of your health, guiding you toward lasting vitality rather than temporary relief.</p>
+  </div>
+  <div class="phil-right fade-up">
+    <div class="pillar">
+      <div class="pillar-num">1</div>
+      <div>
+        <div class="pillar-title">Whole-person care</div>
+        <p class="pillar-text">We treat you as a complete human being, not a collection of symptoms. Every plan is thoughtfully tailored to your life.</p>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">2</div>
+      <div>
+        <div class="pillar-title">Evidence-informed practice</div>
+        <p class="pillar-text">Ancient wisdom is honoured and validated through modern research, ensuring every therapy we offer is both meaningful and effective.</p>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">3</div>
+      <div>
+        <div class="pillar-title">Compassionate presence</div>
+        <p class="pillar-text">Every practitioner brings deep listening and genuine care to each session — you will always feel seen, heard, and valued.</p>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">4</div>
+      <div>
+        <div class="pillar-title">Sustainable transformation</div>
+        <p class="pillar-text">We equip you with tools and knowledge so that wellness becomes something you carry within — not something you return to.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team" id="team">
+  <div class="section-header fade-up">
+    <div>
+      <div class="section-tag">Meet the healers</div>
+      <h2>Our <em>dedicated</em> practitioners</h2>
+    </div>
+  </div>
+  <div class="team-grid">
+    <div class="team-card fade-up">
+      <div class="team-avatar"><div class="avatar-initials">SR</div></div>
+      <div class="team-name">Dr. Sarah Rowe</div>
+      <div class="team-role">Integrative Medicine</div>
+    </div>
+    <div class="team-card fade-up">
+      <div class="team-avatar"><div class="avatar-initials">JL</div></div>
+      <div class="team-name">James Liu</div>
+      <div class="team-role">Yoga & Movement</div>
+    </div>
+    <div class="team-card fade-up">
+      <div class="team-avatar"><div class="avatar-initials">AM</div></div>
+      <div class="team-name">Amara Mensah</div>
+      <div class="team-role">Nutritional Therapy</div>
+    </div>
+    <div class="team-card fade-up">
+      <div class="team-avatar"><div class="avatar-initials">EB</div></div>
+      <div class="team-name">Elena Bergström</div>
+      <div class="team-role">Mindfulness & Meditation</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-header fade-up">
+    <div>
+      <div class="section-tag">Stories of change</div>
+      <h2>What our clients <em>say</em></h2>
+    </div>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card fade-up">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Coming to Wellness World was the best decision I ever made for myself. After years of burnout, I finally feel like myself again — grounded, energised, and truly well."</p>
+      <div class="testi-author">— Priya K., Marketing Director</div>
+    </div>
+    <div class="testi-card fade-up">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"The combination of massage and nutritional coaching transformed my relationship with my body. Their holistic approach addresses root causes, not just symptoms."</p>
+      <div class="testi-author">— Marcus T., Entrepreneur</div>
+    </div>
+    <div class="testi-card fade-up">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"The retreat weekend was a revelation. I left with practical tools for daily wellbeing and a deep sense of peace I hadn't felt in years. Simply extraordinary."</p>
+      <div class="testi-author">— Claire V., Teacher</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="section-tag fade-up">Start today</div>
+  <h2 class="fade-up">Your <em>journey</em> begins with a single step</h2>
+  <p class="cta-sub fade-up">Book a free 20-minute consultation and discover which pathway is right for you.</p>
+  <div class="cta-form fade-up">
+    <input type="email" placeholder="Your email address" class="cta-input">
+    <a href="#" class="btn-primary" style="white-space:nowrap">Get started</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <span class="footer-logo">Wellness <span>World</span></span>
+    <p class="footer-desc">A sanctuary for holistic healing, located in the heart of the city. Open Monday – Saturday, 8am – 8pm.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Services</h4>
+    <ul>
+      <li><a href="#">Massage Therapy</a></li>
+      <li><a href="#">Yoga Classes</a></li>
+      <li><a href="#">Meditation</a></li>
+      <li><a href="#">Nutrition</a></li>
+      <li><a href="#">Retreats</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Company</h4>
+    <ul>
+      <li><a href="#">Our Story</a></li>
+      <li><a href="#">The Team</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">Careers</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Contact</h4>
+    <ul>
+      <li><a href="#">Book a Session</a></li>
+      <li><a href="#">hello@wellnessworld.com</a></li>
+      <li><a href="#">+1 (555) 012 3456</a></li>
+      <li><a href="#">Find Us</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">© 2026 Wellness World. All rights reserved. Crafted with care.</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
