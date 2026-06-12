@@ -244,52 +244,99 @@
     50% { transform: translate(-50%, -50%) scale(1.06); }
   }
 
-  .leaf-icon {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -55%);
-    width: 120px;
-    height: 120px;
+  /* ENERGY BODY DIAGRAM */
+  .body-figure {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
   }
 
-  .floating-card {
+  .energy-point {
+    cursor: pointer;
+    transition: r 0.25s ease, opacity 0.25s ease;
+  }
+
+  .energy-point-ring {
+    fill: none;
+    stroke: var(--sage);
+    opacity: 0;
+    transition: opacity 0.25s ease, r 0.25s ease;
+    pointer-events: none;
+  }
+
+  .energy-point-group:hover .energy-point {
+    r: 11;
+  }
+
+  .energy-point-group:hover .energy-point-ring {
+    opacity: 0.5;
+    animation: ringPulse 1.4s ease-out infinite;
+  }
+
+  @keyframes ringPulse {
+    0% { r: 9; opacity: 0.6; }
+    100% { r: 22; opacity: 0; }
+  }
+
+  .energy-tooltip {
     position: absolute;
     background: white;
-    border-radius: 16px;
+    border-radius: 14px;
     padding: 1rem 1.25rem;
-    box-shadow: 0 8px 32px rgba(61,50,40,0.1);
-    animation: float 4s ease-in-out infinite;
+    box-shadow: 0 8px 32px rgba(61,50,40,0.14);
+    width: 220px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: none;
+    z-index: 5;
   }
 
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
+  .energy-tooltip.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
   }
 
-  .fc1 { bottom: 60px; left: -30px; animation-delay: 0s; }
-  .fc2 { top: 60px; right: -20px; animation-delay: 1.5s; }
-
-  .fc-label {
+  .energy-tooltip-label {
     font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--stone);
-    margin-bottom: 0.3rem;
+    color: var(--sage);
+    font-weight: 500;
+    margin-bottom: 0.35rem;
   }
 
-  .fc-val {
+  .energy-tooltip-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.6rem;
+    font-size: 1.25rem;
     font-weight: 600;
     color: var(--bark);
+    margin-bottom: 0.4rem;
+    line-height: 1.2;
   }
 
-  .fc-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--sage);
-    display: inline-block;
-    margin-right: 6px;
+  .energy-tooltip-desc {
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: var(--stone);
+    font-weight: 300;
+  }
+
+  .energy-hint {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--stone);
+    text-align: center;
+    opacity: 0.8;
+    white-space: nowrap;
   }
 
   /* SERVICES */
@@ -735,21 +782,135 @@
     <div class="hero-visual">
       <div class="hero-circle hc1"></div>
       <div class="hero-circle hc2"></div>
-      <!-- Leaf SVG -->
-      <svg class="leaf-icon" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M60 15 C60 15 100 30 100 70 C100 95 82 108 60 108 C38 108 20 95 20 70 C20 30 60 15 60 15Z" fill="#7a9e7e" opacity="0.9"/>
-        <path d="M60 108 L60 45" stroke="white" stroke-width="2" stroke-linecap="round"/>
-        <path d="M60 75 C50 65 38 62 38 62" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-        <path d="M60 60 C70 50 82 47 82 47" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+
+      <!-- Body figure with energy points -->
+      <svg class="body-figure" viewBox="0 0 200 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Realistic silhouette -->
+        <g opacity="0.9">
+          <!-- Head -->
+          <ellipse cx="100" cy="34" rx="17" ry="20" fill="#7a9e7e" opacity="0.32"/>
+          <!-- Neck -->
+          <path d="M93 50 L93 60 Q100 64 107 60 L107 50 Z" fill="#7a9e7e" opacity="0.28"/>
+          <!-- Shoulders + torso -->
+          <path d="M68 70
+                   Q60 74 56 88
+                   L52 132
+                   Q51 150 55 168
+                   Q58 188 64 206
+                   L70 232
+                   Q72 240 78 240
+                   L88 240
+                   Q90 232 90 220
+                   L92 180
+                   L100 180
+                   L108 180
+                   L110 220
+                   Q110 232 112 240
+                   L122 240
+                   Q128 240 130 232
+                   L136 206
+                   Q142 188 145 168
+                   Q149 150 148 132
+                   L144 88
+                   Q140 74 132 70
+                   Q116 62 100 62
+                   Q84 62 68 70Z" fill="#7a9e7e" opacity="0.28"/>
+          <!-- Upper arms -->
+          <path d="M58 90 Q44 110 40 142 Q38 164 44 184" stroke="#7a9e7e" stroke-width="15" stroke-linecap="round" opacity="0.24" fill="none"/>
+          <path d="M142 90 Q156 110 160 142 Q162 164 156 184" stroke="#7a9e7e" stroke-width="15" stroke-linecap="round" opacity="0.24" fill="none"/>
+          <!-- Forearms + hands -->
+          <path d="M44 184 Q42 204 46 222" stroke="#7a9e7e" stroke-width="11" stroke-linecap="round" opacity="0.22" fill="none"/>
+          <path d="M156 184 Q158 204 154 222" stroke="#7a9e7e" stroke-width="11" stroke-linecap="round" opacity="0.22" fill="none"/>
+          <!-- Thighs -->
+          <path d="M82 244 Q78 282 76 320" stroke="#7a9e7e" stroke-width="19" stroke-linecap="round" opacity="0.26" fill="none"/>
+          <path d="M118 244 Q122 282 124 320" stroke="#7a9e7e" stroke-width="19" stroke-linecap="round" opacity="0.26" fill="none"/>
+          <!-- Calves -->
+          <path d="M76 322 Q74 354 76 388" stroke="#7a9e7e" stroke-width="14" stroke-linecap="round" opacity="0.22" fill="none"/>
+          <path d="M124 322 Q126 354 124 388" stroke="#7a9e7e" stroke-width="14" stroke-linecap="round" opacity="0.22" fill="none"/>
+          <!-- Feet -->
+          <ellipse cx="74" cy="396" rx="11" ry="6" fill="#7a9e7e" opacity="0.22"/>
+          <ellipse cx="126" cy="396" rx="11" ry="6" fill="#7a9e7e" opacity="0.22"/>
+        </g>
+
+        <!-- Connecting energy line -->
+        <line x1="100" y1="6" x2="100" y2="312" stroke="#b8d4bb" stroke-width="1.5" stroke-dasharray="2 4" opacity="0.6"/>
+
+        <!-- Energy points -->
+        <!-- Crown (above head) -->
+        <g class="energy-point-group" data-point="crown">
+          <circle class="energy-point-ring" cx="100" cy="8" r="9"/>
+          <circle class="energy-point" cx="100" cy="8" r="7" fill="#7a9e7e"/>
+        </g>
+        <!-- Throat -->
+        <g class="energy-point-group" data-point="throat">
+          <circle class="energy-point-ring" cx="100" cy="57" r="9"/>
+          <circle class="energy-point" cx="100" cy="57" r="7" fill="#c4856a"/>
+        </g>
+        <!-- Heart -->
+        <g class="energy-point-group" data-point="heart">
+          <circle class="energy-point-ring" cx="100" cy="115" r="9"/>
+          <circle class="energy-point" cx="100" cy="115" r="7" fill="#7a9e7e"/>
+        </g>
+        <!-- Solar plexus -->
+        <g class="energy-point-group" data-point="solar">
+          <circle class="energy-point-ring" cx="100" cy="165" r="9"/>
+          <circle class="energy-point" cx="100" cy="165" r="7" fill="#c4856a"/>
+        </g>
+        <!-- Sacral -->
+        <g class="energy-point-group" data-point="sacral">
+          <circle class="energy-point-ring" cx="100" cy="200" r="9"/>
+          <circle class="energy-point" cx="100" cy="200" r="7" fill="#7a9e7e"/>
+        </g>
+        <!-- Navel -->
+        <g class="energy-point-group" data-point="navel">
+          <circle class="energy-point-ring" cx="100" cy="228" r="9"/>
+          <circle class="energy-point" cx="100" cy="228" r="7" fill="#e8c5b5"/>
+        </g>
+        <!-- Root -->
+        <g class="energy-point-group" data-point="root">
+          <circle class="energy-point-ring" cx="100" cy="312" r="9"/>
+          <circle class="energy-point" cx="100" cy="312" r="7" fill="#c4856a"/>
+        </g>
       </svg>
-      <div class="floating-card fc1">
-        <div class="fc-label"><span class="fc-dot"></span>Next session</div>
-        <div class="fc-val">9:00 am</div>
+
+      <!-- Tooltips -->
+      <div class="energy-tooltip" id="tooltip-crown" style="top: -30px; right: -20px;">
+        <div class="energy-tooltip-label">Crown · Mind</div>
+        <div class="energy-tooltip-title">Mental fatigue</div>
+        <div class="energy-tooltip-desc">Overthinking and racing thoughts often settle here, clouding clarity and focus.</div>
       </div>
-      <div class="floating-card fc2">
-        <div class="fc-label"><span class="fc-dot"></span>Stress level</div>
-        <div class="fc-val">↓ 42%</div>
+      <div class="energy-tooltip" id="tooltip-throat" style="top: 60px; left: -30px;">
+        <div class="energy-tooltip-label">Throat · Voice</div>
+        <div class="energy-tooltip-title">Unspoken tension</div>
+        <div class="energy-tooltip-desc">Withheld words and suppressed emotions can create tightness and blockage here.</div>
       </div>
+      <div class="energy-tooltip" id="tooltip-heart" style="top: 120px; right: -30px;">
+        <div class="energy-tooltip-label">Heart · Connection</div>
+        <div class="energy-tooltip-title">Emotional weight</div>
+        <div class="energy-tooltip-desc">Grief, loneliness, and guarded feelings often manifest as heaviness in the chest.</div>
+      </div>
+      <div class="energy-tooltip" id="tooltip-solar" style="top: 175px; left: -30px;">
+        <div class="energy-tooltip-label">Solar plexus · Power</div>
+        <div class="energy-tooltip-title">Anxious energy</div>
+        <div class="energy-tooltip-desc">Worry and a need for control frequently knot up as tension in the stomach area.</div>
+      </div>
+      <div class="energy-tooltip" id="tooltip-sacral" style="top: 215px; right: -30px;">
+        <div class="energy-tooltip-label">Sacral · Flow</div>
+        <div class="energy-tooltip-title">Suppressed creativity</div>
+        <div class="energy-tooltip-desc">Restricted self-expression and pleasure can create stagnation in this center.</div>
+      </div>
+      <div class="energy-tooltip" id="tooltip-navel" style="top: 250px; left: -30px;">
+        <div class="energy-tooltip-label">Navel · Identity</div>
+        <div class="energy-tooltip-title">Buried self-doubt</div>
+        <div class="energy-tooltip-desc">Shame, low self-worth, and past hurts often settle in the navel, affecting confidence and self-acceptance.</div>
+      </div>
+      <div class="energy-tooltip" id="tooltip-root" style="bottom: 40px; right: -30px;">
+        <div class="energy-tooltip-label">Root · Stability</div>
+        <div class="energy-tooltip-title">Survival stress</div>
+        <div class="energy-tooltip-desc">Financial worry and feeling unsafe often ground themselves as tension in the hips and legs.</div>
+      </div>
+
+      <div class="energy-hint">Hover an energy centre to explore</div>
     </div>
   </div>
 </section>
@@ -933,6 +1094,17 @@
 
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
+  document.querySelectorAll('.energy-point-group').forEach(group => {
+    const point = group.dataset.point;
+    const tooltip = document.getElementById('tooltip-' + point);
+    group.addEventListener('mouseenter', () => tooltip.classList.add('visible'));
+    group.addEventListener('mouseleave', () => tooltip.classList.remove('visible'));
+    group.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      document.querySelectorAll('.energy-tooltip').forEach(t => t.classList.remove('visible'));
+      tooltip.classList.add('visible');
+    });
+  });
   document.getElementById('consult-form').addEventListener('submit', function(e) {
     e.preventDefault();
     const email = document.getElementById('consult-email').value;
