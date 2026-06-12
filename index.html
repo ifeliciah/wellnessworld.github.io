@@ -874,74 +874,15 @@
   </div>
 </section>
 
-<!-- TEAM -->
-<section class="team" id="team">
-  <div class="section-header fade-up">
-    <div>
-      <div class="section-tag">Meet the healers</div>
-      <h2>Our <em>dedicated</em> practitioners</h2>
-    </div>
-  </div>
-  <div class="team-grid">
-    <div class="team-card fade-up">
-      <div class="team-avatar"><div class="avatar-initials">SR</div></div>
-      <div class="team-name">Dr. Sarah Rowe</div>
-      <div class="team-role">Integrative Medicine</div>
-    </div>
-    <div class="team-card fade-up">
-      <div class="team-avatar"><div class="avatar-initials">JL</div></div>
-      <div class="team-name">James Liu</div>
-      <div class="team-role">Yoga & Movement</div>
-    </div>
-    <div class="team-card fade-up">
-      <div class="team-avatar"><div class="avatar-initials">AM</div></div>
-      <div class="team-name">Amara Mensah</div>
-      <div class="team-role">Nutritional Therapy</div>
-    </div>
-    <div class="team-card fade-up">
-      <div class="team-avatar"><div class="avatar-initials">EB</div></div>
-      <div class="team-name">Elena Bergström</div>
-      <div class="team-role">Mindfulness & Meditation</div>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="testimonials">
-  <div class="section-header fade-up">
-    <div>
-      <div class="section-tag">Stories of change</div>
-      <h2>What our clients <em>say</em></h2>
-    </div>
-  </div>
-  <div class="testi-grid">
-    <div class="testi-card fade-up">
-      <div class="testi-stars">★★★★★</div>
-      <p class="testi-text">"Coming to Wellness World was the best decision I ever made for myself. After years of burnout, I finally feel like myself again — grounded, energised, and truly well."</p>
-      <div class="testi-author">— Priya K., Marketing Director</div>
-    </div>
-    <div class="testi-card fade-up">
-      <div class="testi-stars">★★★★★</div>
-      <p class="testi-text">"The combination of massage and nutritional coaching transformed my relationship with my body. Their holistic approach addresses root causes, not just symptoms."</p>
-      <div class="testi-author">— Marcus T., Entrepreneur</div>
-    </div>
-    <div class="testi-card fade-up">
-      <div class="testi-stars">★★★★★</div>
-      <p class="testi-text">"The retreat weekend was a revelation. I left with practical tools for daily wellbeing and a deep sense of peace I hadn't felt in years. Simply extraordinary."</p>
-      <div class="testi-author">— Claire V., Teacher</div>
-    </div>
-  </div>
-</section>
-
 <!-- CTA -->
 <section class="cta-section" id="contact">
   <div class="section-tag fade-up">Start today</div>
   <h2 class="fade-up">Your <em>journey</em> begins with a single step</h2>
   <p class="cta-sub fade-up">Book a free 20-minute consultation and discover which pathway is right for you.</p>
-  <div class="cta-form fade-up">
-    <input type="email" placeholder="Your email address" class="cta-input">
-    <a href="#" class="btn-primary" style="white-space:nowrap">Get started</a>
-  </div>
+  <form class="cta-form fade-up" id="consult-form">
+    <input type="email" placeholder="Your email address" class="cta-input" id="consult-email" required>
+    <button type="submit" class="btn-primary" style="white-space:nowrap; border:none; cursor:pointer;">Get started</button>
+  </form>
 </section>
 
 <!-- FOOTER -->
@@ -991,6 +932,14 @@
   }, { threshold: 0.12 });
 
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  document.getElementById('consult-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = document.getElementById('consult-email').value;
+    const subject = encodeURIComponent('New 20-minute consultation request');
+    const body = encodeURIComponent('A new consultation request has been submitted.\n\nClient email: ' + email);
+    window.location.href = `mailto:feliciacenter99@gmail.com?subject=${subject}&body=${body}`;
+  });
 </script>
 </body>
 </html>
