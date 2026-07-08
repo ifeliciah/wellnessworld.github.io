@@ -1144,5 +1144,98 @@
     window.location.href = `mailto:feliciacenter99@gmail.com?subject=${subject}&body=${body}`;
   });
 </script>
+
+<!-- Floating Chatbot -->
+<style>
+#wellness-chat-button {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 60px;
+    height: 60px;
+    background: #6b8e23;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 9999;
+}
+
+#wellness-chat-box {
+    display: none;
+    position: fixed;
+    bottom: 95px;
+    right: 25px;
+    width: 320px;
+    height: 400px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+    z-index: 9999;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+#wellness-chat-box h3 {
+    margin-top: 0;
+}
+
+#wellness-chat-input {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    width: 85%;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+}
+
+.chat-message {
+    margin: 10px 0;
+    padding: 10px;
+    background: #f3f3f3;
+    border-radius: 10px;
+}
+</style>
+
+
+<div id="wellness-chat-button">
+    💬
+</div>
+
+<div id="wellness-chat-box">
+    <h3>Wellness Assistant</h3>
+
+    <div class="chat-message">
+        Hi! I can help answer questions about Wellness World.
+    </div>
+
+    <div class="chat-message">
+        Try asking:<br>
+        "What services do you offer?"
+    </div>
+
+    <input id="wellness-chat-input" placeholder="Type your question...">
+</div>
+
+
+<script>
+const chatButton = document.getElementById("wellness-chat-button");
+const chatBox = document.getElementById("wellness-chat-box");
+
+chatButton.onclick = function() {
+    if (chatBox.style.display === "block") {
+        chatBox.style.display = "none";
+    } else {
+        chatBox.style.display = "block";
+    }
+};
+</script>
+
+ 
 </body>
 </html>
