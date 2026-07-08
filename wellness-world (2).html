@@ -556,6 +556,83 @@
     color: var(--stone);
   }
 
+  /* INDUSTRY / CHARTS */
+  .industry {
+    padding: 8rem 6rem;
+    background: white;
+  }
+
+  .industry-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 3rem;
+    margin-top: 4rem;
+    align-items: stretch;
+  }
+
+  .chart-card {
+    background: var(--mist);
+    border-radius: 16px;
+    padding: 2.5rem;
+  }
+
+  .chart-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: var(--bark);
+    margin-bottom: 0.35rem;
+  }
+
+  .chart-sub {
+    font-size: 0.78rem;
+    color: var(--stone);
+    margin-bottom: 1.75rem;
+    font-weight: 300;
+  }
+
+  .chart-source {
+    font-size: 0.7rem;
+    color: var(--stone);
+    margin-top: 1.25rem;
+    font-weight: 300;
+    opacity: 0.8;
+  }
+
+  .industry-side {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .industry-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 4rem;
+  }
+
+  .istat-card {
+    background: var(--sage-pale);
+    border-radius: 12px;
+    padding: 1.75rem;
+  }
+
+  .istat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.1rem;
+    font-weight: 600;
+    color: var(--bark);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .istat-label {
+    font-size: 0.78rem;
+    color: var(--stone);
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
   /* CTA */
   .cta-section {
     padding: 8rem 6rem;
@@ -687,9 +764,11 @@
     .team-grid { grid-template-columns: repeat(2, 1fr); }
     .testi-grid { grid-template-columns: 1fr; }
     footer { grid-template-columns: 1fr 1fr; gap: 2rem; padding: 3rem 2rem; }
-    .testimonials, .team, .cta-section { padding: 5rem 2rem; }
+    .testimonials, .team, .cta-section, .industry { padding: 5rem 2rem; }
     .phil-left { padding: 4rem 2rem; }
     .phil-right { padding: 4rem 2rem; }
+    .industry-grid { grid-template-columns: 1fr; }
+    .industry-stats { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -735,12 +814,30 @@
     <div class="hero-visual">
       <div class="hero-circle hc1"></div>
       <div class="hero-circle hc2"></div>
-      <!-- Leaf SVG -->
-      <svg class="leaf-icon" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M60 15 C60 15 100 30 100 70 C100 95 82 108 60 108 C38 108 20 95 20 70 C20 30 60 15 60 15Z" fill="#7a9e7e" opacity="0.9"/>
-        <path d="M60 108 L60 45" stroke="white" stroke-width="2" stroke-linecap="round"/>
-        <path d="M60 75 C50 65 38 62 38 62" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-        <path d="M60 60 C70 50 82 47 82 47" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      <!-- Human anatomy silhouette SVG -->
+      <svg class="leaf-icon" viewBox="0 0 120 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:150px;height:200px;">
+        <!-- head -->
+        <circle cx="60" cy="20" r="14" fill="#7a9e7e" opacity="0.9"/>
+        <!-- neck -->
+        <rect x="55" y="32" width="10" height="8" fill="#7a9e7e" opacity="0.9"/>
+        <!-- torso -->
+        <path d="M40 40 C34 40 30 48 31 58 L34 90 C34 96 38 100 44 100 L76 100 C82 100 86 96 86 90 L89 58 C90 48 86 40 80 40 Z" fill="#7a9e7e" opacity="0.9"/>
+        <!-- arms -->
+        <path d="M31 46 C24 50 18 62 16 78 C15.5 82 19 85 22 82 C25 68 30 58 35 52 Z" fill="#7a9e7e" opacity="0.75"/>
+        <path d="M89 46 C96 50 102 62 104 78 C104.5 82 101 85 98 82 C95 68 90 58 85 52 Z" fill="#7a9e7e" opacity="0.75"/>
+        <!-- legs -->
+        <path d="M44 100 L42 145 C41.5 150 46 153 49 149 L54 105 Z" fill="#7a9e7e" opacity="0.85"/>
+        <path d="M76 100 L78 145 C78.5 150 74 153 71 149 L66 105 Z" fill="#7a9e7e" opacity="0.85"/>
+        <!-- subtle spine / centerline -->
+        <line x1="60" y1="40" x2="60" y2="100" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+        <!-- chest / anatomical arcs -->
+        <path d="M42 58 Q60 66 78 58" stroke="white" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.6"/>
+        <path d="M40 74 Q60 82 80 74" stroke="white" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.5"/>
+        <!-- energy points (chakra-like nodes) -->
+        <circle cx="60" cy="20" r="3" fill="#faf8f3"/>
+        <circle cx="60" cy="48" r="2.5" fill="#faf8f3" opacity="0.9"/>
+        <circle cx="60" cy="66" r="2.5" fill="#faf8f3" opacity="0.9"/>
+        <circle cx="60" cy="84" r="2.5" fill="#faf8f3" opacity="0.9"/>
       </svg>
       <div class="floating-card fc1">
         <div class="fc-label"><span class="fc-dot"></span>Next session</div>
@@ -874,6 +971,112 @@
   </div>
 </section>
 
+<!-- INDUSTRY / GLOBAL WELLNESS DATA -->
+<section class="industry" id="industry">
+  <div class="section-header fade-up">
+    <div>
+      <div class="section-tag">The bigger picture</div>
+      <h2>The global <em>wellness</em> economy</h2>
+    </div>
+  </div>
+
+  <div class="industry-grid">
+    <div class="chart-card fade-up">
+      <div class="chart-title">Wellness economy growth, 2013–2029</div>
+      <div class="chart-sub">Global market value, in trillion USD</div>
+      <svg viewBox="0 0 480 260" width="100%" height="auto">
+        <!-- gridlines -->
+        <line x1="40" y1="20" x2="40" y2="210" stroke="#8a8278" stroke-width="1" opacity="0.25"/>
+        <line x1="40" y1="210" x2="460" y2="210" stroke="#8a8278" stroke-width="1" opacity="0.25"/>
+        <line x1="40" y1="155" x2="460" y2="155" stroke="#8a8278" stroke-width="1" opacity="0.12" stroke-dasharray="3 4"/>
+        <line x1="40" y1="100" x2="460" y2="100" stroke="#8a8278" stroke-width="1" opacity="0.12" stroke-dasharray="3 4"/>
+        <line x1="40" y1="45" x2="460" y2="45" stroke="#8a8278" stroke-width="1" opacity="0.12" stroke-dasharray="3 4"/>
+        <!-- y labels -->
+        <text x="30" y="214" text-anchor="end" font-size="10" fill="#8a8278" font-family="DM Sans, sans-serif">$0T</text>
+        <text x="30" y="159" text-anchor="end" font-size="10" fill="#8a8278" font-family="DM Sans, sans-serif">$5T</text>
+        <text x="30" y="104" text-anchor="end" font-size="10" fill="#8a8278" font-family="DM Sans, sans-serif">$10T</text>
+        <!-- area under line -->
+        <path d="M60 179 L145 155 L280 137 L340 127 L370 117 L455 55 L455 210 L60 210 Z" fill="#7a9e7e" opacity="0.15"/>
+        <!-- line: 2013:3.4 2019:5 2023:6.3 2024:6.8 2025:7.4(proj) 2029:9.8(proj) scaled y=210-(val*15.4) approx -->
+        <polyline points="60,179 145,155 280,137 340,127 370,117 455,55" fill="none" stroke="#7a9e7e" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+        <polyline points="370,117 455,55" fill="none" stroke="#c4856a" stroke-width="2.5" stroke-dasharray="5 5" stroke-linejoin="round" stroke-linecap="round"/>
+        <!-- points -->
+        <circle cx="60" cy="179" r="4" fill="#7a9e7e"/>
+        <circle cx="145" cy="155" r="4" fill="#7a9e7e"/>
+        <circle cx="280" cy="137" r="4" fill="#7a9e7e"/>
+        <circle cx="340" cy="127" r="4" fill="#7a9e7e"/>
+        <circle cx="370" cy="117" r="4" fill="#c4856a"/>
+        <circle cx="455" cy="55" r="4" fill="#c4856a"/>
+        <!-- value labels -->
+        <text x="60" y="170" text-anchor="middle" font-size="10" fill="#3d3228" font-family="Cormorant Garamond, serif" font-weight="600">$3.4T</text>
+        <text x="145" y="146" text-anchor="middle" font-size="10" fill="#3d3228" font-family="Cormorant Garamond, serif" font-weight="600">$5.0T</text>
+        <text x="280" y="128" text-anchor="middle" font-size="10" fill="#3d3228" font-family="Cormorant Garamond, serif" font-weight="600">$6.3T</text>
+        <text x="340" y="118" text-anchor="middle" font-size="10" fill="#3d3228" font-family="Cormorant Garamond, serif" font-weight="600">$6.8T</text>
+        <text x="370" y="108" text-anchor="middle" font-size="10" fill="#3d3228" font-family="Cormorant Garamond, serif" font-weight="600">$7.4T</text>
+        <text x="455" y="46" text-anchor="middle" font-size="10" fill="#3d3228" font-family="Cormorant Garamond, serif" font-weight="600">$9.8T</text>
+        <!-- x labels -->
+        <text x="60" y="228" text-anchor="middle" font-size="10" fill="#8a8278" font-family="DM Sans, sans-serif">2013</text>
+        <text x="145" y="228" text-anchor="middle" font-size="10" fill="#8a8278" font-family="DM Sans, sans-serif">2019</text>
+        <text x="280" y="228" text-anchor="middle" font-size="10" fill="#8a8278" font-family="DM Sans, sans-serif">2023</text>
+        <text x="340" y="228" text-anchor="middle" font-size="10" fill="#8a8278" font-family="DM Sans, sans-serif">2024</text>
+        <text x="370" y="228" text-anchor="middle" font-size="10" fill="#8a8278" font-family="DM Sans, sans-serif">2025e</text>
+        <text x="455" y="228" text-anchor="middle" font-size="10" fill="#8a8278" font-family="DM Sans, sans-serif">2029e</text>
+      </svg>
+      <div class="chart-source">Source: Global Wellness Institute, Global Wellness Economy Monitor 2025</div>
+    </div>
+
+    <div class="chart-card fade-up">
+      <div class="chart-title">Fastest-growing wellness sectors</div>
+      <div class="chart-sub">Average annual growth, 2019–2024</div>
+      <svg viewBox="0 0 380 260" width="100%" height="auto">
+        <!-- bars: real estate 19.5, mental wellness 12.4, trad/comp medicine 10.8ish, thermal springs ~9 -->
+        <!-- baseline -->
+        <line x1="150" y1="15" x2="150" y2="235" stroke="#8a8278" stroke-width="1" opacity="0.25"/>
+
+        <text x="140" y="38" text-anchor="end" font-size="10.5" fill="#3d3228" font-family="DM Sans, sans-serif">Wellness real estate</text>
+        <rect x="150" y="24" width="195" height="20" rx="4" fill="#7a9e7e"/>
+        <text x="352" y="38" font-size="11" fill="#3d3228" font-family="Cormorant Garamond, serif" font-weight="600">19.5%</text>
+
+        <text x="140" y="88" text-anchor="end" font-size="10.5" fill="#3d3228" font-family="DM Sans, sans-serif">Mental wellness</text>
+        <rect x="150" y="74" width="124" height="20" rx="4" fill="#7a9e7e" opacity="0.85"/>
+        <text x="281" y="88" font-size="11" fill="#3d3228" font-family="Cormorant Garamond, serif" font-weight="600">12.4%</text>
+
+        <text x="140" y="138" text-anchor="end" font-size="10.5" fill="#3d3228" font-family="DM Sans, sans-serif">Traditional &amp; comp. medicine</text>
+        <rect x="150" y="124" width="108" height="20" rx="4" fill="#7a9e7e" opacity="0.7"/>
+        <text x="265" y="138" font-size="11" fill="#3d3228" font-family="Cormorant Garamond, serif" font-weight="600">10.8%</text>
+
+        <text x="140" y="188" text-anchor="end" font-size="10.5" fill="#3d3228" font-family="DM Sans, sans-serif">Thermal / mineral springs</text>
+        <rect x="150" y="174" width="100" height="20" rx="4" fill="#7a9e7e" opacity="0.55"/>
+        <text x="257" y="188" font-size="11" fill="#3d3228" font-family="Cormorant Garamond, serif" font-weight="600">10.0%</text>
+
+        <text x="140" y="228" text-anchor="end" font-size="10.5" fill="#3d3228" font-family="DM Sans, sans-serif">Workplace wellness</text>
+        <rect x="150" y="214" width="14" height="20" rx="4" fill="#c4856a"/>
+        <text x="171" y="228" font-size="11" fill="#3d3228" font-family="Cormorant Garamond, serif" font-weight="600">−1.5%</text>
+      </svg>
+      <div class="chart-source">Source: Global Wellness Institute, Global Wellness Economy Monitor 2025</div>
+    </div>
+  </div>
+
+  <div class="industry-stats">
+    <div class="istat-card fade-up">
+      <div class="istat-num">$6.8T</div>
+      <div class="istat-label">Global wellness economy value in 2024 — larger than the IT, tourism, and sports industries combined by segment comparison.</div>
+    </div>
+    <div class="istat-card fade-up">
+      <div class="istat-num">6.1%</div>
+      <div class="istat-label">Share of global GDP the wellness economy represented in 2024, projected to reach 7.1% by 2029.</div>
+    </div>
+    <div class="istat-card fade-up">
+      <div class="istat-num">$2.2T</div>
+      <div class="istat-label">North America remains the largest regional wellness market, followed by Asia-Pacific and Europe.</div>
+    </div>
+    <div class="istat-card fade-up">
+      <div class="istat-num">7.6%</div>
+      <div class="istat-label">Projected annual growth rate through 2029 — outpacing global GDP growth forecasts.</div>
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="cta-section" id="contact">
   <div class="section-tag fade-up">Start today</div>
@@ -915,7 +1118,7 @@
     <ul>
       <li><a href="#">Book a Session</a></li>
       <li><a href="#">hello@wellnessworld.com</a></li>
-      <li><a href="#">+1 (555) 012 3456</a></li>
+      <li><a href="#">+62-81808880888</a></li>
       <li><a href="#">Find Us</a></li>
     </ul>
   </div>
