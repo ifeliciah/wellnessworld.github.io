@@ -1203,39 +1203,161 @@
 </style>
 
 
+<!-- Floating Chatbot -->
+<style>
+#wellness-chat-button {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 60px;
+    height: 60px;
+    background: #6b8e23;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 9999;
+}
+
+#wellness-chat-box {
+    display: none;
+    position: fixed;
+    bottom: 95px;
+    right: 25px;
+    width: 320px;
+    height: 400px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+    z-index: 9999;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+#chat-content {
+    height: 300px;
+    overflow-y: auto;
+}
+
+.chat-message {
+    margin: 10px 0;
+    padding: 10px;
+    background: #f3f3f3;
+    border-radius: 10px;
+}
+
+.user-message {
+    background: #d9ead3;
+    text-align: right;
+}
+
+#wellness-chat-input {
+    width: 90%;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+}
+</style>
+
+
 <div id="wellness-chat-button">
-    💬
+💬
 </div>
 
+
 <div id="wellness-chat-box">
-    <h3>Wellness Assistant</h3>
 
-    <div class="chat-message">
-        Hi! I can help answer questions about Wellness World.
-    </div>
+<h3>Wellness Assistant</h3>
 
-    <div class="chat-message">
-        Try asking:<br>
-        "What services do you offer?"
-    </div>
+<div id="chat-content">
+<div class="chat-message">
+Hi! I'm the Wellness World assistant. How can I help you?
+</div>
+</div>
 
-    <input id="wellness-chat-input" placeholder="Type your question...">
+<input id="wellness-chat-input" placeholder="Type your question...">
+
 </div>
 
 
 <script>
-const chatButton = document.getElementById("wellness-chat-button");
-const chatBox = document.getElementById("wellness-chat-box");
 
-chatButton.onclick = function() {
-    if (chatBox.style.display === "block") {
-        chatBox.style.display = "none";
+const button = document.getElementById("wellness-chat-button");
+const box = document.getElementById("wellness-chat-box");
+const input = document.getElementById("wellness-chat-input");
+const content = document.getElementById("chat-content");
+
+
+button.onclick = function(){
+    if(box.style.display === "block"){
+        box.style.display = "none";
     } else {
-        chatBox.style.display = "block";
+        box.style.display = "block";
     }
 };
-</script>
 
+
+input.addEventListener("keypress", function(event){
+
+    if(event.key === "Enter"){
+
+        let question = input.value.toLowerCase();
+
+        if(question.trim() === ""){
+            return;
+        }
+
+
+        // show visitor message
+        content.innerHTML += 
+        `<div class="chat-message user-message">${input.value}</div>`;
+
+
+        let answer = "";
+
+
+        if(question.includes("service")){
+            answer = "Wellness World provides wellness consultation and personalized lifestyle guidance.";
+        }
+
+        else if(question.includes("book") || question.includes("appointment")){
+            answer = "You can contact Wellness World through the contact section to schedule a consultation.";
+        }
+
+        else if(question.includes("price") || question.includes("cost")){
+            answer = "Please contact us directly for consultation pricing.";
+        }
+
+        else if(question.includes("hello") || question.includes("hi")){
+            answer = "Hello! Welcome to Wellness World. How can I assist you today?";
+        }
+
+        else {
+            answer = "Thank you for your question. Please contact Wellness World for more personalized assistance.";
+        }
+
+
+        setTimeout(function(){
+
+            content.innerHTML +=
+            `<div class="chat-message">${answer}</div>`;
+
+            content.scrollTop = content.scrollHeight;
+
+        },500);
+
+
+        input.value="";
+
+    }
+
+});
+
+</script>
  
 </body>
 </html>
